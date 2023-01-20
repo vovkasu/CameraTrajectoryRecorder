@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace CameraTrajectoryRecorder
@@ -40,6 +41,7 @@ namespace CameraTrajectoryRecorder
         {
             StopProcessInternal();
             TrackPlayer.Play(CameraTrack);
+            UpdateUi();
         }
 
         public void StopProcess()
@@ -51,6 +53,11 @@ namespace CameraTrajectoryRecorder
         public void SaveTrack()
         {
             TrackStorage.SaveTrack(CameraTrack);
+        }
+
+        public void LoadTrackListScene()
+        {
+            SceneManager.LoadScene("TrackListScene", LoadSceneMode.Single);
         }
 
         private void StopProcessInternal()

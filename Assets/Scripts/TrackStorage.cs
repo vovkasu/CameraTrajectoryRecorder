@@ -44,6 +44,21 @@ namespace CameraTrajectoryRecorder
             PlayerPrefs.Save();
         }
 
+        private void DeleteTrackIdFromList(string trackId)
+        {
+            var allTrackIds = GetAllTrackIds();
+            if (!allTrackIds.Contains(trackId))
+            {
+                return;
+            }
+
+            allTrackIds.Remove(trackId);
+
+            var trackInJson = JsonUtility.ToJson(allTrackIds);
+            PlayerPrefs.SetString(_trackIdList, trackInJson);
+            PlayerPrefs.Save();
+        }
+
         private string GetNewTrackId()
         {
             var allTrackIds = GetAllTrackIds();
@@ -80,7 +95,24 @@ namespace CameraTrajectoryRecorder
             }
 
             var trackInJson = PlayerPrefs.GetString(trackId);
-            _selectedTrack = JsonUtility.FromJson<CameraTrack>(trackInJson);
+            var cameraTrack = ScriptableObject.CreateInstance<CameraTrack>();
+            JsonUtility.FromJsonOverwrite(trackInJson, cameraTrack);
+            _selectedTrack = cameraTrack;
+        }
+
+        public void DeleteTrack(string trackId)
+        {
+            if (PlayerPrefs.HasKey(trackId))
+            {
+                PlayerPrefs.DeleteKey(trackId);
+            }
+            DeleteTrackIdFromList(trackId);
+            PlayerPrefs.Save();
+        }
+
+        public void ResetSelectedTrack()
+        {
+            _selectedTrack = null;
         }
     }
 
@@ -99,6 +131,11 @@ namespace CameraTrajectoryRecorder
         public void Add(string trackId)
         {
             List.Add(trackId);
+        }
+
+        public void Remove(string trackId)
+        {
+            List.Remove(trackId);
         }
     }
 }
