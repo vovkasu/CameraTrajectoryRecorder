@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,15 +10,21 @@ namespace CameraTrajectoryRecorder
         public Camera MainCamera;
         public TrackRecorder TrackRecorder;
         public TrackPlayer TrackPlayer;
+        public TrackStorage TrackStorage;
 
         [Header("UI")] 
         public Button StopButton;
         public TextMeshProUGUI StopButtonText;
         public Button PlayButton;
+        public Button SaveTrackButton;
         public Transform MainUi;
 
         private void Start()
         {
+            if (CameraTrack == null)
+            {
+                CameraTrack = TrackStorage.GetSelectedTrack();
+            }
             UpdateUi();
         }
 
@@ -41,6 +46,11 @@ namespace CameraTrajectoryRecorder
         {
             StopProcessInternal();
             UpdateUi();
+        }
+
+        public void SaveTrack()
+        {
+            TrackStorage.SaveTrack(CameraTrack);
         }
 
         private void StopProcessInternal()
@@ -66,7 +76,9 @@ namespace CameraTrajectoryRecorder
             }
 
             MainUi.gameObject.SetActive(!inProcess);
-            PlayButton.interactable = CameraTrack != null && !CameraTrack.IsEmpty();
+            SaveTrackButton.interactable = 
+                PlayButton.interactable = 
+                    CameraTrack != null && !CameraTrack.IsEmpty();
         }
     }
 }

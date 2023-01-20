@@ -8,6 +8,7 @@ namespace CameraTrajectoryRecorder
     public class CameraTrack : ScriptableObject
     {
         public List<BezierKnot> Knots = new List<BezierKnot>();
+        public string TrackId;
 
         public bool IsEmpty()
         {
