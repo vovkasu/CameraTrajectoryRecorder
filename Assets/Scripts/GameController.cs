@@ -34,7 +34,7 @@ namespace CameraTrajectoryRecorder
         public void PlayTrack()
         {
             StopProcessInternal();
-            TrackPlayer.Play(MainCamera, CameraTrack);
+            TrackPlayer.Play(CameraTrack);
         }
 
         public void StopProcess()
