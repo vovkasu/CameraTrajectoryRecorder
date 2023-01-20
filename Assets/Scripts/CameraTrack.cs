@@ -18,7 +18,7 @@ namespace CameraTrajectoryRecorder
 
         public void SetKnots(IEnumerable<BezierKnot> knots)
         {
-            Knots = knots.Select(_=>_).ToList();
+            Knots = new List<BezierKnot>(knots);
         }
     }
 }
