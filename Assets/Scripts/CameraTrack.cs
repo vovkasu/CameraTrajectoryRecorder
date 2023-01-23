@@ -1,24 +1,21 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.Splines;
 
 namespace CameraTrajectoryRecorder
 {
     public class CameraTrack : ScriptableObject
     {
-        public List<BezierKnot> Knots = new List<BezierKnot>();
+        public List<CameraTrackKey> Keys = new List<CameraTrackKey>();
         public string TrackId;
 
         public bool IsEmpty()
         {
-            return Knots.Count == 0;
+            return Keys.Count == 0;
         }
 
-        public void SetKnots(IEnumerable<BezierKnot> knots)
+        public void SetKeys(IEnumerable<CameraTrackKey> keys)
         {
-            Knots = new List<BezierKnot>(knots);
+            Keys = new List<CameraTrackKey>(keys);
         }
     }
 }
