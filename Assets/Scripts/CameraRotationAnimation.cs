@@ -16,7 +16,7 @@ namespace CameraTrajectoryRecorder
 
         public void Play(CameraTrack cameraTrack, TimeMode timeMode, Transform targetTransform)
         {
-            if (cameraTrack == null && cameraTrack.Keys != null && cameraTrack.Keys.Count > 1)
+            if (cameraTrack == null || cameraTrack.Keys == null || cameraTrack.Keys.Count < 1)
             {
                 throw new ArgumentNullException(nameof(cameraTrack));
             }
