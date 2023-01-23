@@ -16,7 +16,7 @@ namespace CameraTrajectoryRecorder
 
         public void Play(CameraTrack cameraTrack, TimeMode timeMode, Transform targetTransform)
         {
-            if (cameraTrack == null || cameraTrack.Keys == null || cameraTrack.Keys.Count < 1)
+            if (cameraTrack == null || cameraTrack.Keys == null || cameraTrack.Keys.Count < 2)
             {
                 throw new ArgumentNullException(nameof(cameraTrack));
             }
@@ -43,16 +43,16 @@ namespace CameraTrajectoryRecorder
         private void Update()
         {
             if (_cameraTrack == null || _timeMode != TimeMode.Update) return;
-            UpdateAnimation(Time.deltaTime);
+            UpdateAnimation();
         }
 
         private void FixedUpdate()
         {
             if (_cameraTrack == null || _timeMode != TimeMode.FixedUpdate) return;
-            UpdateAnimation(Time.fixedDeltaTime);
+            UpdateAnimation();
         }
 
-        private void UpdateAnimation(float deltaTime)
+        private void UpdateAnimation()
         {
             if (Time.timeSinceLevelLoad >= _completedAt)
             {

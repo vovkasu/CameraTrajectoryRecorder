@@ -65,6 +65,7 @@ namespace CameraTrajectoryRecorder
                     sourceEulerAngles.y + delta.x,
                     sourceEulerAngles.z);
                 
+                Debug.Log($"OnPointerMove:{delta} eulerAngles:{eulerAngles}");
                 CameraRotationContainer.rotation = Quaternion.Euler(eulerAngles);
                 AddKey();
             }
