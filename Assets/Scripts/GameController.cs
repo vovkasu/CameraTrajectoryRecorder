@@ -22,7 +22,6 @@ namespace CameraTrajectoryRecorder
 
         private void Start()
         {
-            TrackPlayer.OnCompleted -= UpdateUi;
             TrackPlayer.OnCompleted += UpdateUi;
 
             if (CameraTrack == null)
@@ -30,6 +29,11 @@ namespace CameraTrajectoryRecorder
                 CameraTrack = TrackStorage.GetSelectedTrack();
             }
             UpdateUi();
+        }
+
+        private void OnDestroy()
+        {
+            TrackPlayer.OnCompleted -= UpdateUi;
         }
 
         public void StartTrackRecording()
